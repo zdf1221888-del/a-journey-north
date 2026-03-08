@@ -145,7 +145,7 @@ body.about-page{
 .about-layout.about-desktop{
   min-height:100vh;
   display:flex;
-  padding-top:140px;
+  padding-top:160px;
 }
 
 /* Left text */
@@ -221,7 +221,7 @@ body.about-page{
 
 /* Contact block */
 .about-layout.about-desktop .contact-info{
-  margin-top:200px;
+  margin-top:60px;
   opacity:.7;
   font-size:14px;
 }
