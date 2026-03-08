@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scenery</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Suwannaphum:wght@300;400;700&family=The+Nautigal:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Scenery CSS -->
+  <link rel="stylesheet" href="css/scenery.css">
+</head>
+
+<body class="scenery-page bg-fox">
+
+
+  <!-- 统一 Header（桌面 nav + 手机 hamburger） -->
+  <header id="siteHeader">
+    <h1 class="logo">
+        <a href="index.html">Duofeng</a>
+    </h1>
+
+    <nav class="nav" id="nov">
+      <a href="index.html">Home</a>
+      <div class="nav-item has-dropdown">
+      <a href="albums-scenery.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+        Albums
+      </a>
+
+      <div class="dropdown-menu" role="menu">
+        <a href="scenery.html" role="menuitem">Scenery-based</a>
+        <a href="location.html" role="menuitem">Location-based</a>
+      </div>
+    </div>
+      <a class="active" href="about.html">About</a>
+      <a href="about.html">Contact</a>
+    </nav>
+
+    <button class="hamburger" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="mobileMenu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="scenery.html">Sceenry-based Album</a>
+      <a href="location.html">Location-based Album</a>
+      <a href="about.html" class="active">About</a>
+      <a href="about.html#contact" class="active">Contact</a>
+    </div>
+  </header>
+
+  <!-- Desktop Scenery Layout -->
+  <main class="scenery-layout scenery-desktop">
+
+    <nav class="scenery-menu" aria-label="Scenery categories">
+
+    <a class="menu-item" href="fox.html" data-bg="bg-fox" data-img="images/fox01.jpg">
+    FOX
+    </a>
+
+    <a class="menu-item" href="swan.html" data-bg="bg-swan" data-img="images/swan04.jpg">
+    SWAN
+    </a>
+
+    <a class="menu-item" href="wildlife.html" data-bg="bg-wildlife" data-img="images/wildlife01.jpg">
+    WILDLIFE
+    </a>
+
+    <a class="menu-item" href="sunrise.html" data-bg="bg-sunrise" data-img="images/sunrise01.jpg">
+    SUNRISE
+    </a>
+
+    <a class="menu-item" href="mountain.html" data-bg="bg-mountain" data-img="mountains/mountain23.jpg">
+    MOUNTAIN
+    </a>
+
+    <a class="menu-item" href="stream.html" data-bg="bg-stream" data-img="images/stream07.jpg">
+    STREAM
+    </a>
+
+    </nav>
+
+    <section class="scenery-hero" aria-label="Scenery album preview">
+      <img id="previewImg" src="images/fox01.jpg" alt="Scenery album preview">
+    </section>
+
+  </main>
+
+<script>
+  // ===== Common elements =====
+  const body = document.body;
+  const header = document.getElementById("siteHeader");
+  const previewImg = document.getElementById("previewImg");
+  const items = document.querySelectorAll(".scenery-menu .menu-item");
+  const bgClasses = ["bg-fox","bg-swan","bg-wildlife","bg-sunrise","bg-mountain","bg-stream"];
+
+  // ===== Albums dropdown (desktop click) =====
+  const albumsToggle = document.querySelector("#nov .has-dropdown .dropdown-toggle");
+  const albumsItem = document.querySelector("#nov .has-dropdown");
+
+  if (albumsToggle && albumsItem){
+    albumsToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      albumsItem.classList.toggle("open");
+      albumsToggle.setAttribute(
+        "aria-expanded",
+        albumsItem.classList.contains("open") ? "true" : "false"
+      );
+    });
+
+    const menu = albumsItem.querySelector(".dropdown-menu");
+    if (menu) menu.addEventListener("click", (e) => e.stopPropagation());
+
+    document.addEventListener("click", () => {
+      albumsItem.classList.remove("open");
+      albumsToggle.setAttribute("aria-expanded", "false");
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape"){
+        albumsItem.classList.remove("open");
+        albumsToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  // ===== Desktop hover: show image only when hovering a title =====
+  function setState(bgClass, imgSrc){
+    body.classList.remove(...bgClasses);
+    if (bgClass) body.classList.add(bgClass);
+
+    if (previewImg && imgSrc){
+      if (previewImg.getAttribute("src") !== imgSrc){
+        previewImg.src = imgSrc;
+      }
+      previewImg.style.opacity = "1";
+    }
+  }
+
+  // preload images
+  items.forEach(item => {
+    const src = item.dataset.img;
+    if (src){
+      const img = new Image();
+      img.src = src;
+    }
+  });
+
+  if (window.matchMedia("(min-width: 769px)").matches){
+    items.forEach(item => {
+      item.addEventListener("mouseenter", () => {
+        setState(item.dataset.bg, item.dataset.img);
+      });
+    });
+
+    const menu = document.querySelector(".scenery-menu");
+    if (menu){
+      menu.addEventListener("mouseleave", () => {
+        if (previewImg) previewImg.style.opacity = "0";
+      });
+    }
+  }
+
+  // ===== Mobile hamburger =====
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  function closeMobileMenu(){
+    if (!mobileMenu) return;
+    mobileMenu.classList.remove("is-open");
+    if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
+  }
+
+  if (menuBtn && mobileMenu){
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = mobileMenu.classList.toggle("is-open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    mobileMenu.addEventListener("click", (e) => e.stopPropagation());
+    document.addEventListener("click", closeMobileMenu);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMobileMenu();
+    });
+  }
+
+  // ===== Mobile: hide header on scroll down, show on scroll up =====
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  function handleScroll(){
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (!isMobile || !header) return;
+
+    const y = window.scrollY;
+    const goingDown = y > lastY;
+
+    if (goingDown && y > 20){
+      header.classList.add("is-hidden");
+    } else {
+      header.classList.remove("is-hidden");
+    }
+
+    lastY = y;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking){
+      window.requestAnimationFrame(() => {
+        handleScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>
+

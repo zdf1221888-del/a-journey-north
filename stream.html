@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STREAM Album</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Suwannaphum:wght@300;400;700&family=The+Nautigal:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/stream.css">
+
+  <script>
+    function hideLoading() {
+      const loading = document.getElementById("loading");
+      if (loading) loading.classList.add("hide");
+    }
+    document.addEventListener("DOMContentLoaded", hideLoading);
+    window.addEventListener("load", hideLoading);
+    setTimeout(hideLoading, 3000);
+  </script>
+</head>
+
+<body class="album-page bg-stream">
+    
+<div id="loading">
+    <div class="loader-text">Loading</div>
+  </div>
+
+  <!-- Header: logo + close only -->
+  <header id="siteHeader">
+    <h1 class="logo">
+      <a href="index.html">Duofeng</a>
+    </h1>
+
+    <!-- Close button: back to scenery -->
+    <a href="scenery.html" class="close-btn" aria-label="Close album">
+      <span></span>
+      <span></span>
+    </a>
+  </header>
+
+  <!-- Layout -->
+  <main class="album-layout">
+
+    <!-- Left: sticky text -->
+    <aside class="album-text" aria-label="Stream album description">
+      <h2 class="album-title">STREAM</h2>
+
+      <p class="album-description">
+        A stream flows quietly through the winter landscape, with pale white mist rising gently from the surface of the water. 
+        Sunlight filters through the frost-covered trees along the banks and falls softly onto the moving stream. 
+        In that moment, the scene feels almost unreal — as if the winter landscape has briefly turned into a quiet fairy tale.
+      </p>
+    </aside>
+
+    <!-- Right: page-scrolling gallery -->
+    <section class="album-gallery" aria-label="Stream album gallery">
+      <img src="images/stream01.jpg" alt="sheep">
+      <img src="images/stream02.jpg" alt="horse under a tree">
+      <img src="images/stream03.jpg" alt="lonely dog">
+      <img src="images/stream04.jpg" alt="bird">
+      <img src="images/stream05.jpg" alt="duck">
+      <img src="images/stream06.jpg" alt="duck">
+      <img src="images/stream07.jpg" alt="duck">
+    </section>
+
+  </main>
+
+  <script>
+    // Mobile: hide header on scroll
+    const header = document.getElementById("siteHeader");
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    function onScroll(){
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      if (!isMobile || !header) return;
+
+      const y = window.scrollY;
+      const goingDown = y > lastY;
+
+      if (goingDown && y > 20){
+        header.classList.add("is-hidden");
+      } else {
+        header.classList.remove("is-hidden");
+      }
+
+      lastY = y;
+    }
+
+    window.addEventListener("scroll", () => {
+      if (!ticking){
+        window.requestAnimationFrame(() => {
+          onScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

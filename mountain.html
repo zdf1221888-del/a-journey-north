@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOUNTAIN Album</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Suwannaphum:wght@300;400;700&family=The+Nautigal:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/mountain.css">
+
+  <script>
+    function hideLoading() {
+      const loading = document.getElementById("loading");
+      if (loading) loading.classList.add("hide");
+    }
+    document.addEventListener("DOMContentLoaded", hideLoading);
+    window.addEventListener("load", hideLoading);
+    setTimeout(hideLoading, 3000);
+  </script>
+</head>
+
+<body class="album-page bg-mountain">
+
+  <div id="loading">
+    <div class="loader-text">Loading</div>
+  </div>
+
+  <!-- Header: logo + close only -->
+  <header id="siteHeader">
+    <h1 class="logo">
+      <a href="index.html">Duofeng</a>
+    </h1>
+
+    <!-- Close button: back to scenery -->
+    <a href="scenery.html" class="close-btn" aria-label="Close album">
+      <span></span>
+      <span></span>
+    </a>
+  </header>
+
+  <!-- Layout -->
+  <main class="album-layout">
+
+    <!-- LEFT: sticky text -->
+    <aside class="album-text" aria-label="Mountain album description">
+      <h2 class="album-title">MOUNTAIN</h2>
+
+      <p class="album-description">
+        Mountains have always carried a sense of quiet reverence. 
+        Perhaps because I grew up in the south, the mountains of the north feel different to me — more distant, more solemn, and somehow more powerful in their presence.
+
+        Under a blanket of winter snow, the landscape takes on an added sense of mystery and distance. 
+        When the low winter sun illuminates the slopes, the ridges of the snow-covered peaks become sharply defined, revealing a character that feels steady. 
+        These photographs attempt to capture that balance — the quiet strength and stillness of northern mountains in winter.
+      </p>
+    </aside>
+
+    <!-- page-scrolling gallery -->
+    <section class="album-gallery" aria-label="Mountain album gallery">
+      <img src="mountains/mountain10.jpg" alt="Moon and mountains">
+      <img src="mountains/mountain11.jpg" alt="Moon and mountains">
+      <img src="mountains/mountain12.jpg" alt="Mountains near Sayram Lake">
+      <img src="mountains/mountain13.jpg" alt="Mountains near Sayram Lake">
+      <img src="mountains/mountain14.jpg" alt="Mountains at Hemu Resort">
+      <img src="mountains/mountain15.jpg" alt="Mountains at Hemu Resort">
+      <img src="mountains/mountain16.jpg" alt="Mountains at Hemu Resort">
+      <img src="mountains/mountain17.jpg" alt="Mountains at Hemu Resort">
+      <img src="mountains/mountain18.jpg" alt="Mountains at Hemu Resort">
+      <img src="mountains/mountain19.jpg" alt="Mountains at Hemu Resort">
+      <img src="mountains/mountain20.jpg" alt="Mountains at Kanas">
+      <img src="mountains/mountain21.jpg" alt="Mountains at Kanas">
+      <img src="mountains/mountain22.jpg" alt="Mountains at Kanas">
+      <img src="mountains/mountain23.jpg" alt="Mountains at Kanas">
+      <img src="mountains/mountain24.jpg" alt="Mountains at Kanas">
+
+    </section>
+
+    </section>
+
+  </main>
+
+  <script>
+    // Mobile: hide header on scroll
+    const header = document.getElementById("siteHeader");
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    function onScroll(){
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      if (!isMobile || !header) return;
+
+      const y = window.scrollY;
+      const goingDown = y > lastY;
+
+      if (goingDown && y > 20){
+        header.classList.add("is-hidden");
+      } else {
+        header.classList.remove("is-hidden");
+      }
+
+      lastY = y;
+    }
+
+    window.addEventListener("scroll", () => {
+      if (!ticking){
+        window.requestAnimationFrame(() => {
+          onScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

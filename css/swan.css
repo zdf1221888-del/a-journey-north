@@ -1,0 +1,216 @@
+/* reset */
+*{ margin:0; padding:0; box-sizing:border-box; }
+html, body{ height:100%; }
+
+/* page */
+body.album-page{
+  background:#1a2230; /* swan background from scenery */
+  color:#fff;
+  font-family:"Noto Sans", sans-serif;
+}
+
+/* Header (logo plus close button) */
+#siteHeader{
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color:#fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
+
+  transition: transform .35s ease, opacity .35s ease;
+}
+
+#siteHeader.is-hidden{
+  transform: translateY(-120%);
+  opacity: 0;
+}
+
+.logo{
+  font-family:"The Nautigal", cursive;
+  font-size:44px;
+  font-weight:400;
+  line-height:1;
+}
+.logo a{
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Close button  */
+.close-btn{
+  width: 38px;
+  height: 38px;
+  position: relative;
+  display: inline-block;
+}
+
+.close-btn span{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 2px;
+  background: rgba(255,255,255,.92);
+  border-radius: 2px;
+  transform-origin: center;
+}
+
+.close-btn span:first-child{
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.close-btn span:last-child{
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.close-btn:hover span{
+  opacity: .75;
+}
+
+/* loading */
+#loading{
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index: 9999;
+  opacity:1;
+  transition: opacity 1s ease;
+}
+#loading.hide{ opacity:0; pointer-events:none; }
+
+.loader-text{
+  font-family:"The Nautigal", cursive;
+  font-size:2rem;
+  color:#fff;
+  letter-spacing:.15em;
+  animation: fade 1.5s infinite alternate;
+}
+
+/* Layout */
+.album-layout{
+  padding-top: 140px;  
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  column-gap: 160px;    
+  padding-left: 64px;
+  padding-right: 80px;
+  align-items: start;
+}
+
+.album-text{
+  position: sticky;
+  top: 140px;
+
+  height: calc(100vh - 140px);
+  max-width: 420px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding-bottom: 64px;
+}
+
+.album-title{
+  font-family:"Suwannaphum", serif;
+  font-size: 72px;
+  font-weight: 400;
+  margin-bottom: 18px;
+}
+
+.album-description{
+  font-size: 15px;
+  line-height: 1.9;
+  opacity: .92;
+}
+
+.album-gallery{
+  padding-bottom: 80px;
+}
+
+.album-gallery img{
+  width: 100%;
+  max-width: 980px;
+  display: block;
+  margin: 0 auto 64px;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+  #siteHeader{
+    top: 18px;
+    left: 18px;
+    right: 18px;
+  }
+
+  .album-layout{
+    display: block;
+    padding-top: 110px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .album-text{
+    position: static;
+    top: auto;
+    height: auto;
+    max-width: none;
+
+    display: block;
+    padding-bottom: 0;
+    margin-bottom: 28px;
+  }
+
+  .album-title{
+    font-size: 64px;
+  }
+
+  .album-gallery img{
+    margin: 0 auto 28px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width:768px){
+
+  .album-page #siteHeader{
+    top:0;
+    left:0;
+    right:0;
+
+    padding:16px 18px;
+
+    background:inherit;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+}
+
+
+/*for videos only*/
+.album-gallery video{
+  width:100%;
+  max-width:980px;
+  display:block;
+  margin:0 auto 64px;
+  height:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}

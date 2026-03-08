@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SUNRISE Album</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Suwannaphum:wght@300;400;700&family=The+Nautigal:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/sunrise.css">
+
+  <script>
+    function hideLoading() {
+      const loading = document.getElementById("loading");
+      if (loading) loading.classList.add("hide");
+    }
+    document.addEventListener("DOMContentLoaded", hideLoading);
+    window.addEventListener("load", hideLoading);
+    setTimeout(hideLoading, 3000);
+  </script>
+</head>
+
+<body class="album-page bg-sunrise">
+
+  <div id="loading">
+    <div class="loader-text">Loading</div>
+  </div>
+
+  <!-- Header: logo + close only -->
+  <header id="siteHeader">
+    <h1 class="logo">
+      <a href="index.html">Duofeng</a>
+    </h1>
+
+    <!-- Close button: back to scenery -->
+    <a href="scenery.html" class="close-btn" aria-label="Close album">
+      <span></span>
+      <span></span>
+    </a>
+  </header>
+
+  <!-- Layout -->
+  <main class="album-layout">
+
+    <!-- LEFT: sticky text -->
+    <aside class="album-text" aria-label="Sunrise album description">
+      <h2 class="album-title">SUNRISE</h2>
+
+      <p class="album-description">
+        Winter sunrises in the north often feel especially powerful. 
+        On freezing mornings, the warmth captured by the eyes arrives before the body can truly feel it. 
+        There is something hopeful and almost imaginative about that first light, as if it reminds us what warmth feels like after a long absence.
+
+        This album includes photographs of the coloured sun pillars observed near Hemu Resort — a rare atmospheric phenomenon that appears in extremely cold regions when sunlight reflects off ice crystals suspended in the air. 
+        The collection also features sunrises at Swan Lake and Sayram Lake, where snow-covered landscapes, frozen waters, and distant mountains frame the rising sun and amplify the quiet drama of the morning light.
+      </p>
+    </aside>
+
+    <!-- page-scrolling gallery -->
+    <section class="album-gallery" aria-label="Sunrise album gallery">
+      <img src="images/sunrise01.jpg" alt="Sun Pillar">
+      <img src="images/sunrise02.jpg" alt="Colored Sun Pillar">
+      <img src="images/sunrise03.jpg" alt="Colored Sun Pillar">
+      <img src="images/sunrise04.jpg" alt="Sunrise on horizon">
+      <img src="images/sunrise05.jpg" alt="Sunrise on horizon">
+      <img src="images/sunrise06.jpg" alt="Sunrise at Swan Lake">
+      <img src="images/sunrise07.jpg" alt="Sunrise at Swan Lake">
+      <img src="images/sunrise08.jpg" alt="Sunrise at Swan Lake">
+      <img src="images/sunrise09.jpg" alt="Sunrise at Swan Lake">
+      <img src="images/sunrise10.jpg" alt="Sayram Lake">
+
+    <video autoplay muted loop playsinline>
+        <source src="videos/sunrise.mp4" type="video/mp4">
+    </video>
+    </section>
+
+    </section>
+
+  </main>
+
+  <script>
+    // Mobile: hide header on scroll
+    const header = document.getElementById("siteHeader");
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    function onScroll(){
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      if (!isMobile || !header) return;
+
+      const y = window.scrollY;
+      const goingDown = y > lastY;
+
+      if (goingDown && y > 20){
+        header.classList.add("is-hidden");
+      } else {
+        header.classList.remove("is-hidden");
+      }
+
+      lastY = y;
+    }
+
+    window.addEventListener("scroll", () => {
+      if (!ticking){
+        window.requestAnimationFrame(() => {
+          onScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

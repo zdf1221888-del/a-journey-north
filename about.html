@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About</title>
+
+  <!-- Fonts (merged) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=The+Nautigal:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- VSCode structure -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="about-page">
+
+  <!-- 统一 Header（desktop nav + mobile hamburger） -->
+  <header id="siteHeader" class="site-header">
+    <h1 class="logo">
+        <a href="index.html">Duofeng</a>
+    </h1>
+
+    <nav class="nav" id="nov">
+      <a href="index.html">Home</a>
+      <div class="nav-item has-dropdown">
+      <a href="albums-scenery.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+        Albums
+      </a>
+
+      <div class="dropdown-menu" role="menu">
+        <a href="scenery.html" role="menuitem">Scenery-based</a>
+        <a href="location.html" role="menuitem">Location-based</a>
+      </div>
+    </div>
+      <a class="active" href="about.html">About</a>
+      <a href="about.html">Contact</a>
+    </nav>
+
+    <button class="hamburger" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="mobileMenu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="scenery.html">Sceenry-based Album</a>
+      <a href="location.html">Location-based Album</a>
+      <a href="about.html" class="active">About</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </header>
+
+  <!--DESKTOP ABOUT (from Neocities)-->
+  <main class="about-layout about-desktop">
+
+    <section class="about-text">
+      <h2>About</h2>
+      <p>
+        I’m Duofeng. I am an EE student who enjoys photographing landscapes, wildlife, and moments of travel.
+        This website is a personal project documenting a journey to North-west China.
+        My work focuses on natural environments, wildlife, and travel, with an interest in quiet scenes rather than dramatic events.
+        Through a slow and observational approach, this project reflects a personal way of seeing that values stillness and distance.
+      </p>
+
+      <div class="contact-info">
+        <h3>Contact info</h3>
+        <p></p>
+        <p>Email: <a href="mailto:zdf1221888@gmail.com">zdf1221888@gmail.com</a></p>
+        <p>Phone: 402 288 968</p>
+        <p>
+          Instagram:
+          <a href="https://www.instagram.com/balik_b_001" target="_blank" rel="noopener">
+            @balik_b_001
+          </a>
+        </p>
+
+        <p class="music-credit">
+          Background music: “La petite fille de la mer” — Vangelis (1973)
+          Used for educational portfolio purposes.
+        </p>
+
+      </div>
+    </section>
+
+    <section class="about-slideshow">
+      <div class="fade-slideshow">
+        <img class="fade-slide s1" src="images/mountain01.jpg" alt="Snowy mountain landscape">
+        <img class="fade-slide s2" src="images/mountain02.jpeg" alt="Mountain ridge in winter light">
+        <img class="fade-slide s3" src="images/sky01.jpeg" alt="Sky over open terrain">
+        <img class="fade-slide s4" src="images/sky02.jpeg" alt="Evening sky in blue tones">
+      </div>
+    </section>
+
+  </main>
+
+  <!--mobile about (卡片式)-->
+  <main class="about-mobile">
+
+    <section class="hero-card">
+      <div class="slideshow card-slideshow">
+        <img class="slide s1" src="images/mountain01.jpg" alt="">
+        <img class="slide s2" src="images/mountain02.jpeg" alt="">
+        <img class="slide s3" src="images/sky01.jpeg" alt="">
+        <img class="slide s4" src="images/sky02.jpeg" alt="">
+      </div>
+    </section>
+
+    <section class="info-panel reveal" id="info">
+      <h2>About</h2>
+      <p>
+        I’m Duofeng. I am an EE student who enjoys photographing landscapes, wildlife, and moments of travel.
+        This website is a personal project documenting a journey to North-west China.
+        My work focuses on natural environments, wildlife, and travel, with an interest in quiet scenes rather than dramatic events.
+        Through a slow and observational approach, this project reflects a personal way of seeing that values stillness and distance.
+      </p>
+
+      <h2 id="contact" class="contact-title">Contact</h2>
+      <p>Email: <a href="mailto:zdf1221888@gmail.com">zdf1221888@gmail.com</a></p>
+      <p>Phone: 402 288 968</p>
+      <p>
+        Instagram:
+        <a href="https://www.instagram.com/balik_b_001" target="_blank" rel="noopener">
+          @balik_b_001
+        </a>
+      </p>
+      <p class="music-credit">
+          Background music: “La petite fille de la mer” — Vangelis (1973)
+          Used for educational portfolio purposes.
+      </p>
+    </section>
+
+  </main>
+
+  <!--（mobile menu + header hide + reveal） -->
+  <script>
+    const header = document.getElementById("siteHeader");
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    function closeMenu() {
+      mobileMenu.classList.remove("is-open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = mobileMenu.classList.toggle("is-open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    document.addEventListener("click", closeMenu);
+    mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+
+    // Header hide on scroll (mobile only)
+    let lastY = window.scrollY;
+    window.addEventListener("scroll", () => {
+      if (!window.matchMedia("(max-width: 768px)").matches) return;
+
+      const y = window.scrollY;
+      const goingDown = y > lastY;
+
+      if (goingDown && y > 40) header.classList.add("header--hidden");
+      else header.classList.remove("header--hidden");
+
+      lastY = y;
+    }, { passive: true });
+
+    // Reveal (mobile only)
+    const revealEls = document.querySelectorAll(".reveal");
+    if (window.matchMedia("(max-width: 768px)").matches && revealEls.length) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+        });
+      }, { threshold: 0.18, rootMargin: "0px 0px -10% 0px" });
+
+      revealEls.forEach(el => io.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add("is-visible"));
+    }
+
+    
+
+    
+  </script>
+
+  <script>
+  // Desktop About: Albums dropdown (click only)
+  const albumsToggle = document.querySelector(".nav .has-dropdown .dropdown-toggle");
+  const albumsItem = document.querySelector(".nav .has-dropdown");
+
+  if (albumsToggle && albumsItem){
+    albumsToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      albumsItem.classList.toggle("open");
+      albumsToggle.setAttribute(
+        "aria-expanded",
+        albumsItem.classList.contains("open") ? "true" : "false"
+      );
+    });
+
+    // click anywhere inside the menu
+    const menu = albumsItem.querySelector(".dropdown-menu");
+    menu.addEventListener("click", (e) => e.stopPropagation());
+
+    // click anywhere outside the menu
+    document.addEventListener("click", () => {
+      albumsItem.classList.remove("open");
+      albumsToggle.setAttribute("aria-expanded", "false");
+    });
+
+    // close the drop down menu with ESC 
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape"){
+
+        const mobileMenu = document.getElementById("mobileMenu");
+        const menuBtn = document.getElementById("menuBtn");
+
+        if (mobileMenu){
+        mobileMenu.classList.remove("is-open");
+        }
+
+        if (menuBtn){
+        menuBtn.setAttribute("aria-expanded","false");
+        }
+
+    }
+    });
+  }
+
+  
+</script>
+
+</body>
+</html>

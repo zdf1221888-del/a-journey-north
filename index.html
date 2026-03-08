@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DUOFENG WEBSITE</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=The+Nautigal:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    function hideLoading() {
+      const loading = document.getElementById("loading");
+      if (loading) loading.classList.add("hide");
+    }
+    document.addEventListener("DOMContentLoaded", hideLoading);
+    window.addEventListener("load", hideLoading);
+    setTimeout(hideLoading, 3000);
+  </script>
+</head>
+
+<body class="home-page">
+  <div id="loading">
+    <div class="loader-text">Loading</div>
+  </div>
+
+  <header id="siteHeader">
+    <h1 class="logo">
+        <a href="index.html">Duofeng</a>
+    </h1>
+
+    <!-- Desktop nav -->
+    <nav id="nov">
+      <a href="index.html">Home</a>
+      <div class="nav-item has-dropdown">
+      <a href="albums-scenery.html" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+        Albums
+      </a>
+
+      <div class="dropdown-menu" role="menu">
+        <a href="scenery.html" role="menuitem">Scenery-based</a>
+        <a href="location.html" role="menuitem">Location-based</a>
+      </div>
+    </div>
+      <a href="about.html">About</a>
+      <a href="about.html#contact">Contact</a>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button class="hamburger" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Mobile dropdown -->
+    <div class="mobileMenu" id="mobileMenu">
+      <a href="scenery.html">Sceenry-based Album</a>
+      <a href="location.html">Location-based Album</a>
+      <a href="about.html">About</a>
+      <a href="about.html#contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- Home: full-screen slideshow only -->
+  <section class="home-hero">
+    <div class="slideshow">
+      <img class="slide s1" src="images/mountain01.jpg" alt="snow mountain">
+      <img class="slide s2" src="images/mountain02.jpeg" alt="snow mountain">
+      <img class="slide s3" src="images/mountain04.jpg" alt="snow mountain">
+      <img class="slide s4" src="images/mountain05.jpg" alt="snow mountain">
+      <img class="slide s5" src="images/mountain06.jpg" alt="snow mountain">
+      <img class="slide s6" src="images/mountain07.jpg" alt="snow mountain">
+      <img class="slide s7" src="images/mountain08.jpg" alt="snow mountain">
+      <img class="slide s8" src="images/mountain09.jpg" alt="snow mountain">
+      <img class="slide s9" src="images/land.jpg" alt="frozen land">
+      <img class="slide s10" src="images/rock.jpg" alt="lonely rock">
+      <img class="slide s11" src="images/sky01.jpeg" alt="far sky">
+      <img class="slide s12" src="images/sky02.jpeg" alt="far sky">
+    </div>
+  </section>
+
+  <audio id="bgMusic" loop>
+    <source src="audio/Vangelis - La petite fille de la mer - Remastered (SPOTISAVER).mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicToggle" class="music-btn" aria-label="Toggle music">
+  🔇
+  </button>
+
+  <script src="sketch.js"></script>
+
+  <script>
+    const header = document.getElementById("siteHeader");
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    function closeMenu() {
+      mobileMenu.classList.remove("is-open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = mobileMenu.classList.toggle("is-open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+    document.addEventListener("click", closeMenu);
+
+
+
+
+  /*music*/
+  
+  const music = document.getElementById("bgMusic");
+  const musicBtn = document.getElementById("musicToggle");
+
+  music.volume = 0.25;   
+
+  let playing = false;
+
+  musicBtn.addEventListener("click", () => {
+
+    if (!playing){
+        music.play();
+        musicBtn.textContent = "🔊";
+        playing = true;
+    } else {
+        music.pause();
+        musicBtn.textContent = "🔇";
+        playing = false;
+    }
+
+  });
+  </script>
+
+</body>
+</html>
